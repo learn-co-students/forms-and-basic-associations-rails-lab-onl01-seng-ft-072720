@@ -1,0 +1,4 @@
+rails g migration CreateArtists name:string --no-test-framework
+rails g migration CreateSongs title:string artist_id:integer genre_id:integer --no-test-framework
+rails g migration CreateGenres name:string --no-test-framework
+rails g migration CreateNotes content:string song_id:integer --no-test-framework
