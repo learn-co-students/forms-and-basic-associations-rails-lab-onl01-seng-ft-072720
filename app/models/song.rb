@@ -11,4 +11,13 @@ class Song < ActiveRecord::Base
     self.artist ? self.artist.name : nil
   end
 
+  def notes=(notes)
+    notes.each do |note|
+      if note != "" && !self.notes.exists?(content: note)
+        self.notes.build(content: note)
+      end
+    end
+  end
+
+
 end
