@@ -9,10 +9,12 @@ class SongsController < ApplicationController
 
   def new
     @song = Song.new
+
+    3.times { @song.notes.build }
   end
 
   def create
-    @song = Song.new(song_params)
+    @song = Song.new(song_params(:title, :artist_name, :genre_id, :note_contents => []))
 
     if @song.save
       redirect_to @song
@@ -28,7 +30,7 @@ class SongsController < ApplicationController
   def update
     @song = Song.find(params[:id])
 
-    @song.update(song_params)
+    @song.update(song_params(:title, :artist_name, :genre_id, :note_contents => []))
 
     if @song.save
       redirect_to @song
@@ -46,8 +48,8 @@ class SongsController < ApplicationController
 
   private
 
-  def song_params
-    params.require(:song).permit(:title)
+  def song_params(*args)
+    params.require(:song).permit(*args)
   end
 end
 
